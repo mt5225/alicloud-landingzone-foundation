@@ -9,9 +9,9 @@ data "alicloud_log_service" "open" {
 }
 
 # 升级 config 企业版
-# resource "alicloud_config_configuration_recorder" "cloud-config" {
-#   enterprise_edition = true
-# }
+resource "alicloud_config_configuration_recorder" "cloud-config" {
+  enterprise_edition = true
+}
 
 resource "alicloud_config_rule" "ecs-instances-in-vpc" {
   rule_name                       = "ecs-instances-in-vpc"
@@ -22,9 +22,9 @@ resource "alicloud_config_rule" "ecs-instances-in-vpc" {
   input_parameters = {
     vpcIds = ""
   }
-  risk_level                         = 1
-  source_detail_message_type         = "ConfigurationItemChangeNotification"
-  multi_account = true
+  risk_level                 = 1
+  source_detail_message_type = "ConfigurationItemChangeNotification"
+  multi_account              = true
 }
 
 resource "alicloud_config_rule" "sg-risky-ports-check" {
@@ -34,11 +34,11 @@ resource "alicloud_config_rule" "sg-risky-ports-check" {
   scope_compliance_resource_types = ["ACS::ECS::SecurityGroup"]
   description                     = "检测安全组是否开启风险端口，不开启则视为“合规”。"
   input_parameters = {
-    "ports": "22,3389,80"
+    "ports" : "22,3389,80"
   }
-  risk_level                         = 1
-  source_detail_message_type         = "ConfigurationItemChangeNotification"
-  multi_account = true
+  risk_level                 = 1
+  source_detail_message_type = "ConfigurationItemChangeNotification"
+  multi_account              = true
 }
 
 resource "alicloud_config_rule" "sg-public-access-check" {
@@ -47,10 +47,10 @@ resource "alicloud_config_rule" "sg-public-access-check" {
   source_owner                    = "ALIYUN"
   scope_compliance_resource_types = ["ACS::ECS::SecurityGroup"]
   description                     = "账号下ECS安全组配置不为“0.0.0.0/0”，视为“合规”。"
-  input_parameters = {}
-  risk_level                         = 1
-  source_detail_message_type         = "ConfigurationItemChangeNotification"
-  multi_account = true
+  input_parameters                = {}
+  risk_level                      = 1
+  source_detail_message_type      = "ConfigurationItemChangeNotification"
+  multi_account                   = true
 }
 
 resource "alicloud_config_rule" "ram-user-mfa-check" {
@@ -59,10 +59,10 @@ resource "alicloud_config_rule" "ram-user-mfa-check" {
   source_owner                    = "ALIYUN"
   scope_compliance_resource_types = ["ACS::RAM::User"]
   description                     = "检测RAM用户是否开通MFA二次验证登录，如开通则视为“合规”。"
-  input_parameters = {}
-  risk_level                         = 1
-  source_detail_message_type         = "ConfigurationItemChangeNotification"
-  multi_account = true
+  input_parameters                = {}
+  risk_level                      = 1
+  source_detail_message_type      = "ConfigurationItemChangeNotification"
+  multi_account                   = true
 }
 
 ######################## 步骤3.3 [配置操作审计]##################

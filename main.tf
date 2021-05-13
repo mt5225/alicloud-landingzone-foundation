@@ -66,30 +66,30 @@ resource "alicloud_resource_manager_folder" "rd_folder_Business" {
 }
 
 # 创建一个资源账号:SharedServices, 结算账号选择资源目录主账号
-resource "alicloud_resource_manager_account" "rd_account_SharedServices" {
-  display_name     = var.basic_settings.shared_services_account_name
-  folder_id        = alicloud_resource_manager_folder.rd_folder_core.id
-  payer_account_id = data.alicloud_account.current_account.id
-}
+# resource "alicloud_resource_manager_account" "rd_account_SharedServices" {
+#   display_name     = var.basic_settings.shared_services_account_name
+#   folder_id        = alicloud_resource_manager_folder.rd_folder_core.id
+#   payer_account_id = data.alicloud_account.current_account.id
+# }
 
 ######################## 步骤三 [IT合规与审计] #########################
 
-module "governance" {
-  source = "./modules/governance"
+# module "governance" {
+#   source = "./modules/governance"
 
-  bucket_audit_logs = var.basic_settings.governance.bucket_enterprise_audit_logs
-  trail_audit_logs  = var.basic_settings.governance.trail_enterprise_audit_logs
-  mns               = var.basic_settings.governance.mns
-  master_id         = data.alicloud_account.current_account.id
-}
+#   bucket_audit_logs = var.basic_settings.governance.bucket_enterprise_audit_logs
+#   trail_audit_logs  = var.basic_settings.governance.trail_enterprise_audit_logs
+#   mns               = var.basic_settings.governance.mns
+#   master_id         = data.alicloud_account.current_account.id
+# }
 
 ######################## 步骤四 [企业管理账号身份集成] ###################
 
-module "identity" {
-  source                     = "./modules/identity"
-  shared_services_account_id = alicloud_resource_manager_account.rd_account_SharedServices.id
-  business_folder_id         = alicloud_resource_manager_folder.rd_folder_Business.id
-}
+# module "identity" {
+#   source                     = "./modules/identity"
+#   shared_services_account_id = alicloud_resource_manager_account.rd_account_SharedServices.id
+#   business_folder_id         = alicloud_resource_manager_folder.rd_folder_Business.id
+# }
 
 ######################## 步骤五 [网络配置] #############################
 module "networking" {

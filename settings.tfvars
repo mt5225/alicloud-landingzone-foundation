@@ -1,4 +1,4 @@
-region="cn-shanghai"
+region="cn-beijing"
 
 basic_settings = {
   # 资源目录设置
@@ -152,7 +152,7 @@ network_settings = {
       {
         vswitch_name = "vsw-sharedservices-1"
         cidr_block = "10.36.10.0/26"
-        zone = "cn-shanghai-f"
+        zone = "cn-beijing-g"
       }
     ]
   }
@@ -164,7 +164,7 @@ network_settings = {
       {
         vswitch_name = "vsw-dmz-1"
         cidr_block = "10.36.11.0/26"
-        zone = "cn-shanghai-f"
+        zone = "cn-beijing-g"
       }
     ]
     # 是否在 DMZ VPC 内创建 NAT Gateway
